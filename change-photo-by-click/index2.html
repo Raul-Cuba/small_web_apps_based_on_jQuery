@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>JavaScript для Рауля</title>
+ <meta charset="utf-8">
+</head>
+<body>
+<img src="tt.jpg" width="900" height="600" id="kartinka" onclick="change()">
+
+    <script>
+      function change() {
+       var id = "kartinka";
+       var element_img = document.getElementById(id);
+
+       if ( element_img.src.match("tt") ) {
+        element_img.src = "x.jpg";
+       } else {
+        element_img.src = "tt.jpg";
+       }
+     }
+  </script>
+</body>
+</html>

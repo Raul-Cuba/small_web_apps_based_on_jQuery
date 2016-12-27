@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<meta charset="utf-8">
+
+<style>
+	
+	#stop {
+		width: 100%;
+		height: 50px;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+<script src="jquery.js"></script>
+
+
+
+<ul>
+  
+</ul>  
+<button id="stop" class="btn btn-lg btn-success" onClick="toggle();">Остановить</button>
+<button id="stop" class="btn btn-lg btn-success" onClick="tr();"> Запустить</button>
+
+
+<script>	
+var status = 1;
+var timer = -10;
+var nomer = 1;
+var phrases = ["Только сейчас действуют скидки!",
+			   "Если не купишь - всю жизнь будешь жалеть!",
+			   "Цена вопроса - всего 1000 евро!",
+			   "Тебе все будут завидовать!",
+			   "Если приведешь 100 друзей - будет 1% скидка!",
+			   "Ну не тупи - покупай!",
+			   "Я вот купил - и ты покупай!!",
+			   "Покупай скорей - на складе всего 1 штука",
+			   "Купи сегодня, купи завтра, покупай постоянно!",
+			   "Кому товар практически даром!",
+			   "Купи! Купи! Купи!",
+			   "Тебя начнут уважать и завидовать тебе!",
+			   "Подумай о себе - купи!",
+			   "Не купил - не мужик!",
+			   "Твой сосед уже купил, неужели ты хуже?!",
+];
+
+
+
+
+
+function newTimer(){
+	timer =  setInterval(function(){
+
+						if( status==1 ){
+									change1();
+									status = 2;
+								} else {
+									change2();
+									status = 1;
+								}		
+		          }, 300);
+}
+
+
+
+
+function change1(){
+
+    //сначала красным выделим
+	$("ul li").css("color", "red");
+ }
+
+function change2(){
+	
+	//потом меняем на черный
+	$("ul li").css("color", "black");
+
+    //и добавляем новый элемент
+    var line = "<li>Довод к покупке № " + nomer + 
+    		   "    " +
+    		   getRandomPhrase() + 
+               "</li>";
+	$("ul").append(line);
+	nomer += 1;
+    scroll_to_bottom(1);
+ }
+
+function getRandomPhrase() {
+	var i = getRandomInt(0, phrases.length);
+	return phrases[i];
+}
+
+
+function scroll_to_bottom(speed) {
+	var height= $("body").height(); 
+	$("html,body").animate({"scrollTop":height},speed); 
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+
+$(document).ready(
+
+		function(){
+		     newTimer();
+	     }
+	);
+
+
+function toggle() {
+	if (timer != -10) {
+		clearInterval(timer);
+		timer = -10;
+		$("#stop").text("");
+	} else {
+		newTimer();
+		$("#stop").text("Остановить");
+	}
+}
+function tr() {
+	if (timer != -10) {
+		clearInterval(timer);
+		timer = -10;
+		$("#stop").text("Запу");
+	} else {
+		newTimer();
+		$("#stop").text("Остановить");
+	}
+}
+
+</script>
+
+</body>
+</html>
